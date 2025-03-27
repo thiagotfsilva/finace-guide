@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #201924 !important;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+input::placeholder {
+  color: white !important;
+}
+
+.iconePequeno {
+  width: 130px;
+  height: 60px;
+}
+
+.caixa-de-texto {
+  background-color: #322C3A !important;
+  border-color: #322C3A !important;
+  color: white !important;
+}
+
+.btn-custom {
+  background-color: #A78BFA !important;
+  color: #000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.saldo {
+  color: #A78BFA;
+}
+
