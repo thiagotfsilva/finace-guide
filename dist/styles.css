@@ -38,3 +38,17 @@ input::placeholder {
   color: #A78BFA;
 }
 
+.tabela {
+  background-color: #322C3A !important;
+}
+
+@media (min-width: 992px) {
+  #section1 {
+    background-color: #322C3A !important;
+  }
+
+  #section1 .caixa-de-texto {
+    background-color: #000 !important;
+    border-color: #000 !important;
+  }
+}
