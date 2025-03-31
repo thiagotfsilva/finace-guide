@@ -1,4 +1,11 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 import TipoTransacao from "../enum/TipoTransacao.js";
+import { ValidaCompra, ValidaVenda } from "../utils/validators.js";
 import Armazenador from "./Armazenador.js";
 class Conta {
     titular;
@@ -14,22 +21,22 @@ class Conta {
         return this.titular;
     }
     registraVenda(valor) {
-        this.saldo += valor;
+        this.saldo = this.saldo + valor;
         Armazenador.save("saldo", this.saldo);
     }
     registraCompra(valor) {
-        this.saldo -= valor;
+        this.saldo = this.saldo - valor;
         Armazenador.save("saldo", this.saldo);
     }
     retornaTransacoes() {
         return this.transacoes;
     }
     registraTransacao(novaTransacao) {
-        if (novaTransacao.getTipoTransacao() === TipoTransacao.COMPRA) {
-            this.registraCompra(novaTransacao.getValor());
+        if (novaTransacao.tipoTransacao === TipoTransacao.COMPRA) {
+            this.registraCompra(novaTransacao.valor);
         }
-        else if (novaTransacao.getTipoTransacao() === TipoTransacao.VENDA) {
-            this.registraVenda(novaTransacao.getValor());
+        else if (novaTransacao.tipoTransacao === TipoTransacao.VENDA) {
+            this.registraVenda(novaTransacao.valor);
         }
         else {
             throw new Error("Tipo de transação inválido");
@@ -38,5 +45,11 @@ class Conta {
         Armazenador.save("transacoes", this.transacoes);
     }
 }
+__decorate([
+    ValidaVenda
+], Conta.prototype, "registraVenda", null);
+__decorate([
+    ValidaCompra
+], Conta.prototype, "registraCompra", null);
 const conta = new Conta("Eltin Balaka");
 export { conta };

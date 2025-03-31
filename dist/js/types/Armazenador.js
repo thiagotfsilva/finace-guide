@@ -14,5 +14,8 @@ class Armazenador {
         }
         return JSON.parse(item);
     }
+    static delete(key) {
+        localStorage.removeItem(key);
+    }
 }
 export default Armazenador;

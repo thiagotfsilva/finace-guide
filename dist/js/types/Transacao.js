@@ -9,17 +9,5 @@ class Transacao {
         this.quantidade = quantidade;
         this.valor = valor;
     }
-    getTipoTransacao() {
-        return this.tipoTransacao;
-    }
-    getNomeMercadoria() {
-        return this.nomeMercadoria;
-    }
-    getQuantidade() {
-        return this.quantidade;
-    }
-    getValor() {
-        return this.valor;
-    }
 }
 export default Transacao;

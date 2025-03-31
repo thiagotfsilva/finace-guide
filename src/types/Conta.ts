@@ -1,4 +1,5 @@
 import TipoTransacao from "../enum/TipoTransacao.js";
+import { ValidaCompra, ValidaVenda } from "../utils/validators.js";
 import Armazenador from "./Armazenador.js";
 import Transacao from "./Transacao.js";
 
@@ -19,13 +20,15 @@ class Conta {
     return this.titular;
   }
 
+  @ValidaVenda
   public registraVenda(valor: number): void {
-    this.saldo += valor;
+    this.saldo = this.saldo + valor;
     Armazenador.save("saldo", this.saldo);
   }
 
+  @ValidaCompra
   public registraCompra(valor: number): void {
-    this.saldo -= valor;
+    this.saldo = this.saldo - valor;
     Armazenador.save("saldo", this.saldo);
   }
 
@@ -34,10 +37,10 @@ class Conta {
   }
 
   public registraTransacao(novaTransacao: Transacao): void {
-    if(novaTransacao.getTipoTransacao() === TipoTransacao.COMPRA) {
-      this.registraCompra(novaTransacao.getValor());
-    } else if(novaTransacao.getTipoTransacao() === TipoTransacao.VENDA) {
-      this.registraVenda(novaTransacao.getValor());
+    if(novaTransacao.tipoTransacao === TipoTransacao.COMPRA) {
+      this.registraCompra(novaTransacao.valor);
+    } else if(novaTransacao.tipoTransacao === TipoTransacao.VENDA) {
+      this.registraVenda(novaTransacao.valor);
     } else {
       throw new Error("Tipo de transação inválido");
     }

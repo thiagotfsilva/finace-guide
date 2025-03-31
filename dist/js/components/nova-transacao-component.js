@@ -1,25 +1,34 @@
 import { conta } from "../types/Conta.js";
 import Transacao from "../types/Transacao.js";
+import { validaNomeMercadoria, validaQuantidade } from "../utils/validators.js";
+import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js";
-const formulario = document.querySelector('#form');
-formulario.addEventListener('submit', (event) => {
+import TransacaoTotalComponent from "./transacao-total-component.js";
+const formulario = document.querySelector("#form");
+const spanLimparFormulario = document.querySelector("#limpar-formulario");
+spanLimparFormulario.addEventListener("click", () => {
+    formulario.reset();
+});
+formulario.addEventListener("submit", (event) => {
     try {
         event.preventDefault();
         if (!formulario.checkValidity()) {
-            alert('Por favor, preencha todos os campos da transação!');
+            alert("Por favor, preencha todos os campos da transação!");
             return;
         }
-        const selectTransacao = formulario.querySelector('#tipo_transacao');
-        const inputNomeMercadoria = formulario.querySelector('#nome_mercadoria');
-        const inputQuantidade = formulario.querySelector('#quantidade');
-        const inputValor = formulario.querySelector('#valor');
+        const selectTransacao = formulario.querySelector("#tipo_transacao");
+        const inputNomeMercadoria = formulario.querySelector("#nome_mercadoria");
+        const inputQuantidade = formulario.querySelector("#quantidade");
+        const inputValor = formulario.querySelector("#valor");
         const tipoTransacao = selectTransacao.value;
-        const nomeMercadoria = inputNomeMercadoria.value;
-        const quantidade = inputQuantidade.valueAsNumber;
+        const nomeMercadoria = validaNomeMercadoria(inputNomeMercadoria.value);
+        const quantidade = validaQuantidade(inputQuantidade.valueAsNumber);
         const valor = inputValor.valueAsNumber;
         const transacao = new Transacao(tipoTransacao, nomeMercadoria, quantidade, valor);
         conta.registraTransacao(transacao);
         SaldoComponent.atualizar();
+        TransacaoTotalComponent.atualizar();
+        ExtratoComponent.atualizar();
         formulario.reset();
     }
     catch (error) {
