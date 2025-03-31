@@ -12,21 +12,21 @@
   <title>Fin Guide</title>
 </head>
 
-<body class="">
+<body>
   <div class="row">
     <section class="d-flex flex-column align-items-center min-vh-100 col-12 col-lg-4 px-lg-3" id="section1">
       <h1 class="mt-5 w-100 text-md-center">
         <img class="w-lg-50" src="/dist/assets/icone.svg" alt="Logo da Empesa Fin Guide">
       </h1>
 
-      <form class="container d-flex flex-column">
+      <form id="form" class="container d-flex flex-column">
         <h2 class="text-start text-white mt-5 mb-4">Nova Transação</h2>
 
         <div class="input_grupo d-flex flex-column gap-3 mb-4">
 
           <div class="text-start input-group-lg">
             <label for="tipo_transacao" class="form-label text-white">Tipo Transação</label>
-            <select name="tipo_transacao" class="form-select caixa-de-texto text-white" id="">
+            <select id="tipo_transacao" name="tipo_transacao" class="form-select caixa-de-texto text-white" id="">
               <option value="COMPRA">Compra</option>
               <option value="VENDA">Venda</option>
             </select>
@@ -34,7 +34,7 @@
 
           <div class="text-start input-group-lg">
             <label for="nome_mercadoria" class="form-label text-white">Nome da Mercadoria</label>
-            <input class="form-control caixa-de-texto" type="text" name="nome_mercadoria"
+            <input id="nome_mercadoria" class="form-control caixa-de-texto" type="text" name="nome_mercadoria"
               placeholder="Nome da Mercadoria">
           </div>
 
@@ -42,13 +42,13 @@
             <div class="w-50">
               <div class="text-start input-group-lg">
                 <label for="quantidade" class="form-label text-white">Quantidade</label>
-                <input class="form-control caixa-de-texto" type="number" name="quantidade" placeholder="00">
+                <input id="quantidade" class="form-control caixa-de-texto" type="number" name="quantidade" placeholder="00">
               </div>
             </div>
             <div class="w-50">
               <div class="text-start input-group-lg">
-                <label for="valor" class="form-label text-white">Valor</label>
-                <input class="form-control caixa-de-texto" type="number" name="valor" placeholder="R$ 0,00">
+                <label  for="valor" class="form-label text-white">Valor</label>
+                <input id="valor" class="form-control caixa-de-texto" type="number" name="valor" placeholder="R$ 0,00">
               </div>
             </div>
           </div>
@@ -58,8 +58,7 @@
 
         <div class="d-grid gap-3 d-md-grid gap-md-2 col-md-6 mx-md-auto col-lg-12 my-lg-3">
           <button class="btn btn-lg btn-custom fw-bolder" type="submit">Adicionar</button>
-          <a href="#section2" class="btn btn-lg btn-custom fw-bolder d-lg-none" type="submit">Visualizar Extrato</a
-            href="#section2">
+          <a href="#section2" class="btn btn-lg btn-custom fw-bolder d-lg-none">Visualizar Extrato</a>
         </div>
       </form>
     </section>
@@ -73,7 +72,7 @@
         <h2 class="text-white">Extrato</h2>
         <div class="saldo fw-bold fs-3">
           <p class="mb-0">Saldo</p>
-          <p>R$ 0,00</p>
+          <p id="saldo-valor">R$ 0,00</p>
         </div>
       </div>
 
@@ -87,42 +86,15 @@
             <th class="table-dark" scope="col"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">+</th>
-            <td>Tv LED</td>
-            <td>2</td>
-            <td>R$ 10000,00</td>
-            <td class=""><i class="d-none d-lg-block bi bi-trash"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">+</th>
-            <td>Tv LED</td>
-            <td>2</td>
-            <td>R$ 10000,00</td>
-            <td class=""><i class="d-none d-lg-block bi bi-trash"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">+</th>
-            <td>Tv LED</td>
-            <td>2</td>
-            <td>R$ 10000,00</td>
-            <td class=""><i class="d-none d-lg-block bi bi-trash"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">+</th>
-            <td>Tv LED</td>
-            <td>2</td>
-            <td>R$ 10000,00</td>
-            <td class=""><i class="d-none d-lg-block bi bi-trash"></i></td>
-          </tr>
+        <tbody id="table-body">
+
         </tbody>
         <tfoot>
           <tr>
             <th scope="row">+</th>
             <td>Total</td>
             <td></td>
-            <td>R$ 10000,00</td>
+            <td id="total-transacao">R$ 10000,00</td>
             <td></td>
           </tr>
         </tfoot>
@@ -136,6 +108,7 @@
     </section>
   </div>
 
+  <script type="module" src="js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
