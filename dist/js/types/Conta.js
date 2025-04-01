@@ -4,13 +4,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import ArmazenadorKey from "../enum/ArmazenadorKey.js";
 import TipoTransacao from "../enum/TipoTransacao.js";
 import { ValidaCompra, ValidaVenda } from "../utils/validators.js";
 import Armazenador from "./Armazenador.js";
 class Conta {
     titular;
-    saldo = Armazenador.get("saldo") || 0;
-    transacoes = Armazenador.get("transacoes") || [];
+    saldo = Armazenador.get(ArmazenadorKey.SALDO) || 0;
+    transacoes = Armazenador.get(ArmazenadorKey.TRANSACOES) || [];
     constructor(titular) {
         this.titular = titular;
     }
@@ -22,11 +23,11 @@ class Conta {
     }
     registraVenda(valor) {
         this.saldo = this.saldo + valor;
-        Armazenador.save("saldo", this.saldo);
+        Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
     }
     registraCompra(valor) {
         this.saldo = this.saldo - valor;
-        Armazenador.save("saldo", this.saldo);
+        Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
     }
     retornaTransacoes() {
         return this.transacoes;
@@ -42,7 +43,7 @@ class Conta {
             throw new Error("Tipo de transação inválido");
         }
         this.transacoes.push(novaTransacao);
-        Armazenador.save("transacoes", this.transacoes);
+        Armazenador.save(ArmazenadorKey.TRANSACOES, this.transacoes);
     }
 }
 __decorate([

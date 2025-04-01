@@ -1,7 +1,7 @@
 import TipoTransacao from "../enum/TipoTransacao.js";
 import { conta } from "../types/Conta.js";
 import Transacao from "../types/Transacao.js";
-import { validaNomeMercadoria, validaQuantidade } from "../utils/validators.js";
+import { transformaValorInput, validaNomeMercadoria, validaQuantidade } from "../utils/validators.js";
 import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js";
 import TransacaoTotalComponent from "./transacao-total-component.js";
@@ -35,10 +35,9 @@ formulario.addEventListener("submit", (event) => {
 
     const tipoTransacao = selectTransacao.value as TipoTransacao;
     const nomeMercadoria = validaNomeMercadoria(inputNomeMercadoria.value);
-
     const quantidade = validaQuantidade(inputQuantidade.valueAsNumber);
-    const valor = inputValor.valueAsNumber;
-
+    const valor = transformaValorInput(inputValor.value); // remove todos os caracteres não numéricos e transforma em número
+    console.log(valor);
     const transacao = new Transacao(
       tipoTransacao,
       nomeMercadoria,

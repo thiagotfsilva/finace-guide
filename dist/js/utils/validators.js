@@ -36,4 +36,7 @@ function validaQuantidade(quantidade) {
     }
     return quantidade;
 }
-export { ValidaCompra, ValidaVenda, validaNomeMercadoria, validaQuantidade };
+function transformaValorInput(value) {
+    return parseFloat(value.replace(/[^\d,]/g, "").replace(",", "."));
+}
+export { ValidaCompra, ValidaVenda, validaNomeMercadoria, validaQuantidade, transformaValorInput, };

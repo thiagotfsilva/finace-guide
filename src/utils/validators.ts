@@ -14,7 +14,7 @@ function ValidaCompra(
     }
 
     return originalMethod.apply(this, [valorCompra]);
-  }
+  };
 
   return descriptor;
 }
@@ -25,19 +25,21 @@ function ValidaVenda(
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
-  descriptor.value = function(valorVenda: number) {
-    if(valorVenda <= 0) {
+  descriptor.value = function (valorVenda: number) {
+    if (valorVenda <= 0) {
       throw new Error("O valor a ser creditado precisa ser maior que zero.");
     }
     return originalMethod.apply(this, [valorVenda]);
-  }
+  };
 
   return descriptor;
 }
 
-function validaNomeMercadoria(nomeMercadoria: string) {
-  if(nomeMercadoria.length < 3) {
-    throw new Error("O nome da mercadoria precisa ter pelo menos 3 caracteres.");
+function validaNomeMercadoria(nomeMercadoria: string): string {
+  if (nomeMercadoria.length < 3) {
+    throw new Error(
+      "O nome da mercadoria precisa ter pelo menos 3 caracteres."
+    );
   }
 
   if (nomeMercadoria.length > 35) {
@@ -47,12 +49,22 @@ function validaNomeMercadoria(nomeMercadoria: string) {
   return nomeMercadoria.trim();
 }
 
-function validaQuantidade(quantidade: number) {
-  if(quantidade <= 0) {
+function validaQuantidade(quantidade: number): number {
+  if (quantidade <= 0) {
     throw new Error("A quantidade deve ser maior que zero.");
   }
 
   return quantidade;
 }
 
-export { ValidaCompra, ValidaVenda, validaNomeMercadoria, validaQuantidade };
+function transformaValorInput(value: string): number {
+  return parseFloat(value.replace(/[^\d,]/g, "").replace(",", "."));
+}
+
+export {
+  ValidaCompra,
+  ValidaVenda,
+  validaNomeMercadoria,
+  validaQuantidade,
+  transformaValorInput,
+};
