@@ -43,6 +43,27 @@ input::placeholder {
   background-color: #322C3A !important;
 }
 
+.modal-custom {
+  background-color: #322C3A !important;
+}
+
+.modal-icon {
+  color: #47e1b6 !important;
+  font-size: 80px;
+}
+
+.btn-modal-outline {
+  border: 1px solid #A78BFA !important;
+  width: 33%;
+  color: #A78BFA !important;
+}
+
+.btn-modal-adicionar {
+  background-color: #A78BFA !important;
+  width: 33%;
+  color: #000 !important;
+}
+
 @media (min-width: 992px) {
   #section1 {
     background-color: #322C3A !important;

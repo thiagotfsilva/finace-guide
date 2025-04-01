@@ -37,7 +37,7 @@ formulario.addEventListener("submit", (event) => {
     const nomeMercadoria = validaNomeMercadoria(inputNomeMercadoria.value);
     const quantidade = validaQuantidade(inputQuantidade.valueAsNumber);
     const valor = transformaValorInput(inputValor.value); // remove todos os caracteres não numéricos e transforma em número
-    console.log(valor);
+
     const transacao = new Transacao(
       tipoTransacao,
       nomeMercadoria,

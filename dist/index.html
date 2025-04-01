@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <div class="row">
+  <div class="row" style="max-width: 100%;">
     <section class="d-flex flex-column align-items-center min-vh-100 col-12 col-lg-4 px-lg-3" id="section1">
       <h1 class="mt-5 w-100 text-md-center">
         <img class="w-lg-50" src="/dist/assets/icone.svg" alt="Logo da Empesa Fin Guide">
@@ -57,7 +57,7 @@
         <span id="limpar-formulario" class="text-white text-end mt-5 text-decoration-underline cursor-pointer">Limpar</span>
 
         <div class="d-grid gap-3 d-md-grid gap-md-2 col-md-6 mx-md-auto col-lg-12 my-lg-3">
-          <button class="btn btn-lg btn-custom fw-bolder" type="submit">Adicionar</button>
+          <button class="btn btn-lg btn-custom fw-bolder" type="submit" >Adicionar</button>
           <a href="#section2" class="btn btn-lg btn-custom fw-bolder d-lg-none">Visualizar Extrato</a>
         </div>
       </form>
@@ -68,7 +68,7 @@
         <img class="iconePequeno" src="/dist/assets/icone.svg" alt="Logo da Empesa Fin Guide">
       </div>
 
-      <div class="d-flex align-items-end justify-content-between w-100 mb-3 mt-2 my-lg-5">
+      <div class="d-flex align-items-end justify-content-between w-100 mb-3 mt-2 my-lg-5" style="max-width: 90%;">
         <h2 class="text-white">Extrato</h2>
         <div class="saldo fw-bold fs-3">
           <p class="mb-0">Saldo</p>
@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <table class="table table-dark table-striped p-4 rounded-3 tabela my-lg-5">
+      <table class="table table-dark table-striped p-4 rounded-3 tabela my-lg-5" style="max-width: 90%;">
         <thead>
           <tr>
             <th class="table-dark" scope="col">#</th>
@@ -102,10 +102,37 @@
 
       <hr class="w-100 border-2 border-white my-3 d-lg-none">
 
-      <div class="w-100">
-        <a href="#section1" class="btn btn-lg btn-custom d-lg-none fw-bolder w-100 w-md-50">Nova Transação</a>
+      <div class="w-100 text-center">
+        <a href="#section1" class="btn btn-lg btn-custom d-lg-none fw-bolder w-100 w-md-50" style="max-width: 90%;">Nova Transação</a>
       </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade text-center" id="customModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-custom">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-icon">
+              <i class="bi bi-check-circle"></i>
+              <p class="fs-4">Confirme a adição do produto?</p>
+              <div class="transacao-modal text-center fs-5">
+                <p>Item: Notebook</p>
+                <p>Quantidade: 1</p>
+                <p>Valor: R$ 24,00</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-around mb-1">
+            <button type="button" class="btn btn-modal-outline" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-modal-adicionar" id="adicionar-transacao-modal">Adicionar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="js/main.js"></script>
