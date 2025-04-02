@@ -21,12 +21,14 @@ class Conta {
     getTitular() {
         return this.titular;
     }
-    registraVenda(valor) {
-        this.saldo = this.saldo + valor;
+    registraVenda(valor, quantidade) {
+        const valorTotal = Number(valor) * Number(quantidade);
+        this.saldo = this.saldo + valorTotal;
         Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
     }
-    registraCompra(valor) {
-        this.saldo = this.saldo - valor;
+    registraCompra(valor, quantidade) {
+        const valorTotal = Number(valor) * Number(quantidade);
+        this.saldo = this.saldo - valorTotal;
         Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
     }
     retornaTransacoes() {
@@ -34,10 +36,10 @@ class Conta {
     }
     registraTransacao(novaTransacao) {
         if (novaTransacao.tipoTransacao === TipoTransacao.COMPRA) {
-            this.registraCompra(novaTransacao.valor);
+            this.registraCompra(novaTransacao.valor, novaTransacao.quantidade);
         }
         else if (novaTransacao.tipoTransacao === TipoTransacao.VENDA) {
-            this.registraVenda(novaTransacao.valor);
+            this.registraVenda(novaTransacao.valor, novaTransacao.quantidade);
         }
         else {
             throw new Error("Tipo de transação inválido");

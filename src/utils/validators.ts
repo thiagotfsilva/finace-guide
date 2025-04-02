@@ -4,16 +4,21 @@ function ValidaCompra(
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
-  descriptor.value = function (valorCompra: number) {
+  descriptor.value = function (valorCompra: number, quantidade: number) {
     if (valorCompra <= 0) {
       throw new Error("O valor a ser debitado precisa ser maior que zero.");
     }
 
-    if (valorCompra > this.saldo) {
+    if (quantidade <= 0) {
+      throw new Error("A quantidade deve ser maior que zero.");
+    }
+
+    const valorTotal = valorCompra * quantidade;
+    if (valorTotal > this.saldo) {
       throw new Error("Seu saldo é insuficiente para realizar a operação.");
     }
 
-    return originalMethod.apply(this, [valorCompra]);
+    return originalMethod.apply(this, [valorCompra, quantidade]);
   };
 
   return descriptor;
@@ -25,11 +30,14 @@ function ValidaVenda(
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
-  descriptor.value = function (valorVenda: number) {
+  descriptor.value = function (valorVenda: number, quantidade: number) {
     if (valorVenda <= 0) {
       throw new Error("O valor a ser creditado precisa ser maior que zero.");
     }
-    return originalMethod.apply(this, [valorVenda]);
+    if (quantidade <= 0) {
+      throw new Error("A quantidade deve ser maior que zero.");
+    }
+    return originalMethod.apply(this, [valorVenda, quantidade]);
   };
 
   return descriptor;

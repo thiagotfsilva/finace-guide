@@ -22,14 +22,16 @@ class Conta {
   }
 
   @ValidaVenda
-  public registraVenda(valor: number): void {
-    this.saldo = this.saldo + valor;
+  public registraVenda(valor: number, quantidade: number): void {
+    const valorTotal = Number(valor) * Number(quantidade);
+    this.saldo = this.saldo + valorTotal;
     Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
   }
 
   @ValidaCompra
-  public registraCompra(valor: number): void {
-    this.saldo = this.saldo - valor;
+  public registraCompra(valor: number, quantidade: number): void {
+    const valorTotal = Number(valor) * Number(quantidade);
+    this.saldo = this.saldo - valorTotal;
     Armazenador.save(ArmazenadorKey.SALDO, this.saldo);
   }
 
@@ -39,9 +41,9 @@ class Conta {
 
   public registraTransacao(novaTransacao: Transacao): void {
     if(novaTransacao.tipoTransacao === TipoTransacao.COMPRA) {
-      this.registraCompra(novaTransacao.valor);
+      this.registraCompra(novaTransacao.valor, novaTransacao.quantidade);
     } else if(novaTransacao.tipoTransacao === TipoTransacao.VENDA) {
-      this.registraVenda(novaTransacao.valor);
+      this.registraVenda(novaTransacao.valor, novaTransacao.quantidade);
     } else {
       throw new Error("Tipo de transação inválido");
     }
