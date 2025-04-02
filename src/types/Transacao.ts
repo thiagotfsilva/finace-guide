@@ -1,6 +1,7 @@
 import TipoTransacao from "../enum/TipoTransacao.js";
 
 class Transacao {
+  id: string;
   tipoTransacao: TipoTransacao;
   nomeMercadoria: string;
   quantidade: number;
@@ -12,6 +13,7 @@ class Transacao {
     quantidade: number,
     valor: number
   ) {
+    this.id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     this.tipoTransacao = tipoTransacao;
     this.nomeMercadoria = nomeMercadoria;
     this.quantidade = quantidade;

@@ -5,35 +5,35 @@ import { conta } from "../types/Conta.js";
 import { formatarMoeda } from "../utils/formater.js";
 import SaldoComponent from "./saldo-component.js";
 import TransacaoTotalComponent from "./transacao-total-component.js";
-const corpoTabela = document.getElementById('table-body');
+const corpoTabela = document.getElementById("table-body");
 atualizarExtrato();
-function excluirTransacoes(nomeMercadoria) {
+function excluirTransacoes(id) {
     const transacoes = conta.retornaTransacoes();
-    const novalistaTransacoes = transacoes.filter((transacao) => transacao.nomeMercadoria !== nomeMercadoria);
+    const novalistaTransacoes = transacoes.filter((transacao) => transacao.id !== id);
     Armazenador.delete(ArmazenadorKey.TRANSACOES);
     Armazenador.save(ArmazenadorKey.TRANSACOES, novalistaTransacoes);
 }
 function atualizarExtrato() {
-    corpoTabela.innerHTML = '';
+    corpoTabela.innerHTML = "";
     const transacoes = conta.retornaTransacoes();
     transacoes.map((transacao) => {
-        const linha = document.createElement('tr');
+        const linha = document.createElement("tr");
         linha.innerHTML = `
-      <th scope="row">${transacao.tipoTransacao === TipoTransacao.COMPRA ? '+' : '-'}</th>
+      <th scope="row">${transacao.tipoTransacao === TipoTransacao.COMPRA ? "+" : "-"}</th>
       <td>${transacao.nomeMercadoria}</td>
       <td>${transacao.quantidade}</td>
       <td>${formatarMoeda(transacao.valor)}</td>
       <td><i class="d-none d-lg-block bi bi-trash lixeira"></i></td>
     `;
-        const iconeLixeira = linha.querySelector('.lixeira');
+        const iconeLixeira = linha.querySelector(".lixeira");
         if (iconeLixeira) {
-            iconeLixeira.addEventListener('click', (event) => {
+            iconeLixeira.addEventListener("click", (event) => {
                 const icone = event.target;
-                const linha = icone.closest('tr'); // encontra o elemento pai mais próximo
+                const linha = icone.closest("tr"); // encontra o elemento pai mais próximo
                 if (linha) {
                     linha.remove();
                 }
-                excluirTransacoes(transacao.nomeMercadoria);
+                excluirTransacoes(transacao.id);
                 SaldoComponent.atualizar();
                 TransacaoTotalComponent.atualizar();
             });
@@ -44,6 +44,6 @@ function atualizarExtrato() {
 const ExtratoComponent = {
     atualizar() {
         atualizarExtrato();
-    }
+    },
 };
 export default ExtratoComponent;

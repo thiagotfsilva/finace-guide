@@ -10,6 +10,6 @@ function renderizarSaldo() {
 const SaldoComponent = {
     atualizar() {
         renderizarSaldo();
-    }
+    },
 };
 export default SaldoComponent;

@@ -6,7 +6,7 @@ const saldoValor = document.querySelector("#saldo-valor") as HTMLElement;
 renderizarSaldo();
 
 function renderizarSaldo(): void {
-  if(saldoValor != null) {
+  if (saldoValor != null) {
     saldoValor.textContent = formatarMoeda(conta.getSaldo());
   }
 }
@@ -14,7 +14,7 @@ function renderizarSaldo(): void {
 const SaldoComponent = {
   atualizar() {
     renderizarSaldo();
-  }
-}
+  },
+};
 
 export default SaldoComponent;

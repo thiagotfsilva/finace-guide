@@ -6,42 +6,48 @@ import { formatarMoeda } from "../utils/formater.js";
 import SaldoComponent from "./saldo-component.js";
 import TransacaoTotalComponent from "./transacao-total-component.js";
 
-const corpoTabela = document.getElementById('table-body') as HTMLTableSectionElement;
+const corpoTabela = document.getElementById(
+  "table-body"
+) as HTMLTableSectionElement;
 
 atualizarExtrato();
 
-function excluirTransacoes(nomeMercadoria: string): void {
+function excluirTransacoes(id: string): void {
   const transacoes = conta.retornaTransacoes();
-  const novalistaTransacoes = transacoes.filter((transacao) => transacao.nomeMercadoria !== nomeMercadoria);
+  const novalistaTransacoes = transacoes.filter(
+    (transacao) => transacao.id !== id
+  );
   Armazenador.delete(ArmazenadorKey.TRANSACOES);
   Armazenador.save(ArmazenadorKey.TRANSACOES, novalistaTransacoes);
 }
 
 function atualizarExtrato(): void {
-  corpoTabela.innerHTML = '';
+  corpoTabela.innerHTML = "";
 
   const transacoes = conta.retornaTransacoes();
 
   transacoes.map((transacao) => {
-    const linha = document.createElement('tr');
+    const linha = document.createElement("tr");
     linha.innerHTML = `
-      <th scope="row">${transacao.tipoTransacao === TipoTransacao.COMPRA ? '+' : '-'}</th>
+      <th scope="row">${
+        transacao.tipoTransacao === TipoTransacao.COMPRA ? "+" : "-"
+      }</th>
       <td>${transacao.nomeMercadoria}</td>
       <td>${transacao.quantidade}</td>
       <td>${formatarMoeda(transacao.valor)}</td>
       <td><i class="d-none d-lg-block bi bi-trash lixeira"></i></td>
     `;
 
-    const iconeLixeira = linha.querySelector('.lixeira');
+    const iconeLixeira = linha.querySelector(".lixeira");
 
     if (iconeLixeira) {
-      iconeLixeira.addEventListener('click', (event) => {
+      iconeLixeira.addEventListener("click", (event) => {
         const icone = event.target as HTMLElement;
-        const linha = icone.closest('tr'); // encontra o elemento pai mais próximo
+        const linha = icone.closest("tr"); // encontra o elemento pai mais próximo
         if (linha) {
           linha.remove();
         }
-        excluirTransacoes(transacao.nomeMercadoria);
+        excluirTransacoes(transacao.id);
         SaldoComponent.atualizar();
         TransacaoTotalComponent.atualizar();
       });
@@ -49,14 +55,12 @@ function atualizarExtrato(): void {
 
     corpoTabela.appendChild(linha);
   });
-
 }
 
 const ExtratoComponent = {
   atualizar() {
     atualizarExtrato();
-  }
-}
+  },
+};
 
 export default ExtratoComponent;
-
